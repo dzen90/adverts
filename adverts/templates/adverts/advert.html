@@ -1,0 +1,23 @@
+{% extends "adverts/base.html" %}
+
+{% block title %}
+{{ advert.title }}
+{% endblock %}
+
+{% block content %}
+<h1>{{ advert.title }}</h1>
+{% if advert.author == user %}
+<a href="{% url 'update' advert.pk %}">Edit</a>
+{% endif %}
+{% if advert.thumbnail %}
+<div class="container">
+    <img src="{{ advert.thumbnail.url }}" class="img-responsive" style="width: 25%; float: left; margin-right: 10px;" />
+</div>
+{% endif %}
+<p>Price: {{ advert.price }}</p>
+<p>{{ advert.description }}</p>
+<p>Area: {{ advert.area }} 	&#13217;</p>
+<p>Number of rooms: {{ advert.number_of_rooms }}</p>
+<p>Author: <a href="{% url 'user' advert.author %}">{{ advert.author }}</a></p>
+<p>Published: {{ advert.pub_date }}</p>
+{% endblock %}

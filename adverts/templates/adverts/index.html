@@ -1,0 +1,24 @@
+{% extends "adverts/base.html" %}
+
+{% block title %}
+Adverts &ndash; Home
+{% endblock %}
+
+{% block content %}
+<table class="table table-hover">
+    <tr>
+        <th>Latest added</th>
+    </tr>
+    {% for advert in latest_advert_list %}
+    <tr>        
+        <td style="width: 25%">
+            {% if advert.thumbnail %}
+            <img src="{{ advert.thumbnail.url }}" class="img-responsive" style="width: 100%; float: left; margin-right: 10px;" />
+            {% endif %}
+        </td>       
+        <td style="width: 50%"><a href="{% url 'advert' advert.pk %}">{{ advert.title }}</a></td>
+        <td style="width: 25%">{{ advert.price}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

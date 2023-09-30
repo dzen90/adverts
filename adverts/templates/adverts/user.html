@@ -1,0 +1,35 @@
+{% extends "adverts/base.html" %}
+
+{% block title %}
+{{ advert.title }}
+{% endblock %}
+
+{% block content %}
+<table class="table table-hover">
+    <tr valign="top">
+        {% if user_object.avatar %}
+        <td style="width: 10%"><img src="{{ user_object.avatar.url }}"></td>
+        {% endif %}
+        <td>
+            <h1>User: {{ user_object.username }}</h1>
+            {% if user_object.last_visit %}<p>Last seen on: {{ user_object.last_visit }}</p>{% endif %}
+        </td>
+    </tr>
+    {% if user_adverts_list %}
+    <tr>
+        <th>User's adverts</th>
+    </tr>
+    {% for advert in user_adverts_list %}
+    <tr>        
+        <td style="width: 25%">
+            {% if advert.thumbnail %}
+            <img src="{{ advert.thumbnail.url }}" class="img-responsive" style="width: 100%; float: left; margin-right: 10px;" />
+            {% endif %}
+        </td>       
+        <td style="width: 50%"><a href="{% url 'advert' advert.pk %}">{{ advert.title }}</a></td>
+        <td style="width: 25%">{{ advert.price}}</td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+</table>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "adverts/base.html" %}
+
+{% block content %}
+<h1>Sign In</h1>
+<form class="form-horizontal" method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <fieldset>
+        {% for field in form %}
+        <div class="form-group control-group{% if field.errors %}has-error{% endif %}">
+            <label class="control-label">{{ field.label }}</label>
+            <div class="control">{{ field }}</div>
+        </div>
+        {% endfor %}
+    </fieldset>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-outline-primary">Login</button>
+    </div>
+</form>
+{% endblock %}
